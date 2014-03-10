@@ -1,0 +1,22 @@
+<h1>Sign up for a new account</h1>
+
+<%= form_tag "/users" do %>
+
+  <%= label_tag :user_name %>
+  <%= text_field_tag :user_name %>
+  <br>
+  <%= label_tag :first_name %>
+  <%= text_field_tag :first_name %>
+  <br>
+  <%= label_tag :last_name %>
+  <%= text_field_tag :last_name %>
+  <br>
+  <%= label_tag :email %>
+  <%= text_field_tag :email %>
+  <br>
+  <%= label_tag :password %>
+  <%= password_field_tag :password %>
+  <br>
+  <%= submit_tag "Create Account" %>
+
+<% end %>
