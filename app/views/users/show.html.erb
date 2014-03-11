@@ -4,3 +4,13 @@
 <p>First Name: <%= @user.first_name %></p>
 <p>Last Name: <%= @user.last_name %></p>
 <p>Email: <%= @user.email %></p>
+
+<%= form_tag '/user', :method => 'post' do %>
+
+  <%= label_tag :group_name %>
+  <%= text_field_tag :group_name %>
+  <br>
+  <%= submit_tag 'Join Group', class: 'btn btn-default' %>
+
+<% end %>
+<br>

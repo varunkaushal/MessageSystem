@@ -50,10 +50,75 @@ class UsersController < ApplicationController
 		   o.save
 		   
 	   else
-	       redirect_to message_url, notice: "recipient does not exist"
-		   return
+		   getter = Group.find_by(group_name: params["recipient"])
+		   
+		   if getter
+			   m = Message.new
+			   m.recipient_name = params["recipient"]
+			   m.content = params["content"]
+			   
+			   user = User.find_by(id: session[:user_id])
+			   m.sender_name = user.user_name
+			   m.is_read = 'false'
+			   m.save
+			   
+			   o = Outbox.new
+			   o.user_id = user.id
+			   o.message_id = m.id
+			   o.save
+			   
+			   members = Groupmember.where(:group_id => getter.id).pluck(:user_id)
+			   for x in members
+				   i = Inbox.new
+				   i.user_id = x
+				   i.message_id = m.id
+				   i.save	
+			   end
+		   else
+			   redirect_to message_url, notice: "recipient does not exist"
+			   return
+		   end
 	   end
 	   
 	   redirect_to inbox_url
   end
+  
+  def joinGroup
+		group = Group.find_by(group_name: params["group_name"])
+		if group
+			groupmember = Groupmember.where(:group_id => group.id, :user_id => session[:user_id])
+			if groupmember
+				redirect_to user_url(session[:user_id]), notice: "Already a member"
+				return
+			else
+				gm = Groupmember.new
+				gm.group_id = group.id
+				gm.user_id = session[:user_id]
+				gm.save
+			end
+		else
+			if params["group_name"].empty?
+				redirect_to user_url(session[:user_id]), notice: "Enter a valid group name"
+				return
+			end
+			g = Group.new
+			g.group_name = params["group_name"]
+			
+			if g.valid?
+				g.save
+				gm = Groupmember.new
+				gm.group_id = g.id
+				gm.user_id = session[:user_id]
+				gm.save
+			else
+				@errors = g.errors.full_messages.to_sentence
+				redirect_to user_url(session[:user_id]), notice: @errors
+				return
+			end
+			
+		end
+	redirect_to inbox_url
+  end
+  
+
 end

@@ -18,4 +18,6 @@ MessageSystem::Application.routes.draw do
   get "/message" => "pages#message"
   
   patch "/update.:message_id" => "pages#update"
+  
+  post "/user" => "users#joinGroup"
 end

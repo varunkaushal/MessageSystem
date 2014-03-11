@@ -10,7 +10,7 @@ class User < ActiveRecord::Base
   validates :password_digest, presence: true
   
   after_validation do
-	existing = User.where(:user_name => self.user_name)
+	existing = User.find_by(user_name: self.user_name)
 	if existing
 	  errors.add(:existing, 'Username used')
       return false
