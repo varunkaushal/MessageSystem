@@ -15,10 +15,15 @@ class UsersController < ApplicationController
     user.email = params[:email]
     user.password = params[:password]
 	user.password_confirmation = params[:password]
-    user.save
-	puts user.errors.inspect
-    session[:user_id] = user.id
-    redirect_to root_url, notice: "Thanks for signing up!"
+	
+	if user.valid?
+		user.save
+		session[:user_id] = user.id
+		redirect_to root_url, notice: "Thanks for signing up!"
+	else
+		@errors = user.errors.full_messages.to_sentence
+		redirect_to '/users/new', notice: @errors
+    end
   end
   
   def sendM
@@ -35,12 +40,12 @@ class UsersController < ApplicationController
 		   m.save
 		   
 		   i = Inbox.new
-		   i.user_id = user.id
+		   i.user_id = getter.id
 		   i.message_id = m.id
 		   i.save
 		   
 		   o = Outbox.new
-		   o.user_id = getter.id
+		   o.user_id = user.id
 		   o.message_id = m.id
 		   o.save
 		   

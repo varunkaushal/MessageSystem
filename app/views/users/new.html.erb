@@ -1,5 +1,10 @@
 <h1>Sign up for a new account</h1>
 
+<% if @errors.blank? %>
+<% else %>
+	<%= @errors %>
+<% end %>
+
 <%= form_tag "/users" do %>
 
   <%= label_tag :user_name %>

@@ -28,13 +28,21 @@
     end
 	
 	def inbox
-	  message_ids = Inbox.find_by(user_id: session[:user_id])
-	  @messages = Message.all(:id == message_ids)
+	  message_ids = Inbox.where(:user_id => session[:user_id]).pluck(:message_id)
+	  if message_ids
+		@messages = Message.where("id IN (?)", message_ids)
+	  else
+	    @messages = []
+	  end
 	end
 	
 	def outbox
-	  message_ids = Outbox.find_by(user_id: session[:user_id])
-	  @messages = Message.all(:id == message_ids)
+	  message_ids = Outbox.where(:user_id => session[:user_id]).pluck(:message_id)
+	  if message_ids
+		@messages = Message.where("id IN (?)", message_ids)
+	  else
+	    @messages = []
+	  end
 	end
 	
 	def view
@@ -46,6 +54,12 @@
 	  message = Message.find_by_id(params[:message_id])
 	  message.is_read = 'true'
 	  message.save
+	  redirect_to inbox_url
+	end
+	
+	def removeM
+	  inbox = Inbox.find_by! message_id: params[:m_id]
+	  inbox.destroy
 	  redirect_to inbox_url
 	end
 

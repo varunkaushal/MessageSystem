@@ -8,6 +8,7 @@ MessageSystem::Application.routes.draw do
 
   post "/send" => "users#sendM"
   
+  delete "/inbox.:m_id" => "pages#removeM"
   get "/inbox" => "pages#inbox"
   get "/outbox" => "pages#outbox"
   
@@ -17,6 +18,4 @@ MessageSystem::Application.routes.draw do
   get "/message" => "pages#message"
   
   patch "/update.:message_id" => "pages#update"
-  
-  delete "/inbox/:message_id" => "pages#remove"
 end
