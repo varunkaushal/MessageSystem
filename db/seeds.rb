@@ -1,42 +1,42 @@
 all_message_data = [
 					{:sender_name => "user1",
 					:recipient_name => "user2",
-					:content => "This is the first read message"
+					:content => "This is the first read message",
 					:is_read => "true"
 					},
 					{:sender_name => "user1",
 					:recipient_name => "user3",
-					:content => "This is the second read message"
+					:content => "This is the second read message",
 					:is_read => "true"
 					},
 					{:sender_name => "user1",
 					:recipient_name => "user4",
-					:content => "This is the first unread message"
+					:content => "This is the first unread message",
 					:is_read => "false"
 					},
 					{:sender_name => "user2",
 					:recipient_name => "user3",
-					:content => "This is the second unread message"
+					:content => "This is the second unread message",
 					:is_read => "false"
 					},
 					{:sender_name => "user2",
 					:recipient_name => "user4",
-					:content => "Another message"
+					:content => "Another message",
 					:is_read => "false"
 					},
 					{:sender_name => "user3",
 					:recipient_name => "user4",
-					:content => "Dudes!  there are people here"
+					:content => "Dudes!  there are people here",
 					:is_read => "true"
 					},
 					{:sender_name => "user4",
 					:recipient_name => "group1",
-					:content => "Test test test test"
+					:content => "Test test test test",
 					:is_read => "true"
 					},
 					{:sender_name => "user4",
 					:recipient_name => "group2",
-					:content => "well well well.  we meet again"
+					:content => "well well well.  we meet again",
 					:is_read => "true"
 					}
 					]
@@ -69,61 +69,61 @@ all_user_data = [
 				]
 				
 all_inbox_data = [
-					{:user_id => 2
+					{:user_id => 2,
 					:message_id => 1
 					},
-					{:user_id => 3
+					{:user_id => 3,
 					:message_id => 2
 					},
-					{:user_id => 4
+					{:user_id => 4,
 					:message_id => 3
 					},
-					{:user_id => 3
+					{:user_id => 3,
 					:message_id => 4
 					},
-					{:user_id => 4
+					{:user_id => 4,
 					:message_id => 5
 					},
-					{:user_id => 4
+					{:user_id => 4,
 					:message_id => 6
 					},
-					{:user_id => 1
+					{:user_id => 1,
 					:message_id => 7
 					},
-					{:user_id => 2
+					{:user_id => 2,
 					:message_id => 7
 					},
-					{:user_id => 2
+					{:user_id => 2,
 					:message_id => 8
 					},
-					{:user_id => 3
+					{:user_id => 3,
 					:message_id => 8
 					}
 				 ]
 				 
 all_outbox_data = [
-					{:user_id => 1
+					{:user_id => 1,
 					:message_id => 1
 					},
-					{:user_id => 1
+					{:user_id => 1,
 					:message_id => 2
 					},
-					{:user_id => 1
+					{:user_id => 1,
 					:message_id => 3
 					},
-					{:user_id => 2
+					{:user_id => 2,
 					:message_id => 4
 					},
-					{:user_id => 2
+					{:user_id => 2,
 					:message_id => 5
 					},
-					{:user_id => 3
+					{:user_id => 3,
 					:message_id => 6
 					},
-					{:user_id => 4
+					{:user_id => 4,
 					:message_id => 7
 					},
-					{:user_id => 4
+					{:user_id => 4,
 					:message_id => 8
 					}
 				 ]
@@ -136,26 +136,27 @@ all_group_data = [
 				 ]
 				 
 all_groupmember_data = [
-						{:group_id => 1
+						{:group_id => 1,
 						:user_id => 1
 						},
-						{:group_id => 1
+						{:group_id => 1,
 						:user_id => 2
 						},
-						{:group_id => 2
+						{:group_id => 2,
 						:user_id => 2
 						},
-						{:group_id => 2
+						{:group_id => 2,
 						:user_id => 3
 						}
 					   ]
 					
-User.destroy_all
-Message.destroy_all
+
 Inbox.destroy_all
 Outbox.destroy_all
-Group.destroy_all
 Groupmember.destroy_all
+Message.destroy_all
+Group.destroy_all
+User.destroy_all
 
 all_user_data.each do |user|
   u = User.new
@@ -178,14 +179,14 @@ end
 
 all_inbox_data.each do |inbox|
   i = Inbox.new
-  i.user_id = inbox[:user_id}
+  i.user_id = inbox[:user_id]
   i.message_id = inbox[:user_id]
   i.save
 end
 
 all_outbox_data.each do |outbox|
   o = Outbox.new
-  o.user_id = outbox[:user_id}
+  o.user_id = outbox[:user_id]
   o.message_id = outbox[:user_id]
   o.save
 end
