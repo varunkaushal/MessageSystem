@@ -46,25 +46,29 @@ all_user_data = [
 				 :first_name => "Frank",
 				 :last_name => "User",
 				 :email => "frank@user.com",
-				 :password_digest => "$2a$10$9KffXI5UhJmaPGL4EJJMH.GEN/tfaniY0IYtZCInwjXZ4K6hQzi3S"
+				 :password => "password1",
+				 :password_confirmation => "password1"
 				 },
 				 {:user_name => "user2",
 				 :first_name => "Bill",
 				 :last_name => "User",
 				 :email => "bill@user.com",
-				 :password_digest => "$2a$10$9KffXI5UhJmaPGL4EJJMH.GEN/tfaniY0IYtZCInwjXZ4K6hQzi3S"
+				 :password => "password1",
+				 :password_confirmation => "password1"
 				 },
 				 {:user_name => "user3",
 				 :first_name => "Marge",
 				 :last_name => "User",
 				 :email => "marge@user.com",
-				 :password_digest => "$2a$10$9KffXI5UhJmaPGL4EJJMH.GEN/tfaniY0IYtZCInwjXZ4K6hQzi3S"
+				 :password => "password1",
+				 :password_confirmation => "password1"
 				 },
 				 {:user_name => "user4",
 				 :first_name => "Anne",
 				 :last_name => "User",
 				 :email => "anne@user.com",
-				 :password_digest => "$2a$10$9KffXI5UhJmaPGL4EJJMH.GEN/tfaniY0IYtZCInwjXZ4K6hQzi3S"
+				 :password => "password1",
+				 :password_confirmation => "password1"
 				 },
 				]
 				
@@ -164,7 +168,8 @@ all_user_data.each do |user|
   u.first_name = user[:first_name]
   u.last_name = user[:last_name]
   u.email = user[:email]
-  u.password_digest = user[:password_digest]
+  u.password = user[:password]
+  u.password_confirmation = user[:password]
   u.save
 end
 
@@ -180,14 +185,14 @@ end
 all_inbox_data.each do |inbox|
   i = Inbox.new
   i.user_id = inbox[:user_id]
-  i.message_id = inbox[:user_id]
+  i.message_id = inbox[:message_id]
   i.save
 end
 
 all_outbox_data.each do |outbox|
   o = Outbox.new
   o.user_id = outbox[:user_id]
-  o.message_id = outbox[:user_id]
+  o.message_id = outbox[:message_id]
   o.save
 end
 
