@@ -18,6 +18,7 @@ class UsersController < ApplicationController
 	
 	if user.valid?
 		user.save
+		UserMailer.welcome_email(user).deliver
 		session[:user_id] = user.id
 		redirect_to root_url, notice: "Thanks for signing up!"
 	else

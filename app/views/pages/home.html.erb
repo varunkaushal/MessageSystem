@@ -1,7 +1,7 @@
 <% if session[:user_id].blank? %>
 	<h2 class="page-header">Welcome to the Message Service</h2>
 <% else %>
-	<h2 class="page-header">Welcome Back <%= User.find(session[:user_id]).user_name %></h2>
+	<h2 class="page-header">Welcome <%= User.find(session[:user_id]).first_name %></h2>
 <% end %>
 
 <p class="lead">
