@@ -36,18 +36,13 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <% if session[:user_id] %>
-          <li>Welcome Back <%= User.find(session[:user_id]).user_name %></li>
-        <% end %>
-
-		<li><%= link_to "Inbox", inbox_url %></li>
-        <li><%= link_to "Outbox", outbox_url %></li>
-		<li><%= link_to "New Message", message_url %></li>
-
         <% if session[:user_id].blank? %>
           <li><%= link_to "Sign Up", new_user_url %></li>
           <li><%= link_to "Sign In", new_session_url %></li>
         <% else %>
+		  <li><%= link_to "Inbox", inbox_url %></li>
+          <li><%= link_to "Outbox", outbox_url %></li>
+		  <li><%= link_to "New Message", message_url %></li>
           <li><%= link_to "My Profile", user_url(session[:user_id]) %></li>
           <li><%= link_to "Sign Out", logout_url %></li>
         <% end %>

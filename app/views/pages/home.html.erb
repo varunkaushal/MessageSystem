@@ -1,5 +1,8 @@
-
-<h1 class="page-header">Welcome to the Message Service</h1>
+<% if session[:user_id].blank? %>
+	<h2 class="page-header">Welcome to the Message Service</h2>
+<% else %>
+	<h2 class="page-header">Welcome Back <%= User.find(session[:user_id]).user_name %></h2>
+<% end %>
 
 <p class="lead">
   This site allows you to send private and group messages to other users. 
