@@ -1,0 +1,21 @@
+<h1 class="page-header">Outbox</h1>
+
+<% if session[:user_id].blank? %>
+  <p class="lead">
+    You need to login to see this data.
+  </p>
+<% else %>
+	<% @messages.each do |message| %>
+	  <div class="row">
+		<div class="col-md-9">
+		  <h2>
+			<%= link_to message.recipient_name, view_path(message.id) %>
+		  </h2>
+
+		  <% if message.is_read=='true'%>
+			<p> This message has been read </p>
+		  <% end %>
+		</div>
+	  </div>
+	<% end %>
+<% end %>

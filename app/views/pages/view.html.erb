@@ -1,0 +1,29 @@
+<h1 class="page-header">Message</h1>
+
+<div class="row">
+  <div class="col-md-6">
+
+	  <div class="row">
+		<div class="col-md-9">
+		<h3>
+			From:
+			<%= @message.sender_name %>
+		</h3>
+		<br>
+		<h3>
+			Body:
+			<%= @message.content %>
+		</h3>
+		</div>
+	  </div>
+	  <% if @message.is_read == 'false' %>
+		  <% if @user.user_name == @message.recipient_name %>
+			  <%= form_tag "/update.#{@message.id}", :method => 'patch' do %>
+				<%= submit_tag 'Acknowledge Receipt', class: 'btn btn-default' %>
+			  <% end %>
+		  <% end %>
+	  <% end %>
+	  
+
+  </div>
+</div>

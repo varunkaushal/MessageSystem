@@ -19,12 +19,12 @@ class CreateDb < ActiveRecord::Migration
       t.timestamps
     end
 	
-	create_table :inbox do |t|
+	create_table :inboxes do |t|
 	  t.integer :user_id
       t.integer :message_id
     end
 	
-	create_table :outbox do |t|
+	create_table :outboxes do |t|
 	  t.integer :user_id
       t.integer :message_id
     end

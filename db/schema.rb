@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 20140310153631) do
     t.datetime "updated_at"
   end
 
-  create_table "inbox", force: true do |t|
+  create_table "inboxes", force: true do |t|
     t.integer "user_id"
     t.integer "message_id"
   end
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 20140310153631) do
     t.datetime "updated_at"
   end
 
-  create_table "outbox", force: true do |t|
+  create_table "outboxes", force: true do |t|
     t.integer "user_id"
     t.integer "message_id"
   end
